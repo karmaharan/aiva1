@@ -51,13 +51,15 @@
   #section4 .section-background { background: radial-gradient(circle, #363636 0%, transparent 70%); }
   #section5 .section-background { background: radial-gradient(circle, #3a3a3a 0%, transparent 70%); }
   #section6 .section-background { background: radial-gradient(circle, #3e3e3e 0%, transparent 70%); }
+  #section7 .section-background { background: radial-gradient(circle, #3e3e3e 0%, transparent 70%); }
 
-  #section1 { z-index: 6; }
-  #section2 { z-index: 5; transform: translateX(100%); }
-  #section3 { z-index: 4; transform: translateY(100%); }
-  #section4 { z-index: 3; transform: translateX(-100%); }
-  #section5 { z-index: 2; transform: translateY(-100%); }
-  #section6 { z-index: 1; transform: translateX(100%); }
+  #section1 { z-index: 7; transform: translateX(0); }
+  #section2 { z-index: 6; transform: translateX(100%); }
+  #section3 { z-index: 5; transform: translateY(100%); }
+  #section4 { z-index: 4; transform: translateX(-100%); }
+  #section5 { z-index: 3; transform: translateY(-100%); }
+  #section6 { z-index: 2; transform: translateX(100%); }
+  #section7 { z-index: 1; transform: translateX(100%); }
   
   .content {
     max-width: 800px;
@@ -199,7 +201,7 @@
     .content {
       padding: 20px;
     }
-      .background-title {
+    .background-title {
     display: none;
   }
   }
@@ -388,7 +390,85 @@
       <div class="particles" id="particles6"></div>
     </div>
   </div>
+  <div id="section7" class="section">
+    <div class="section-background"></div>
+    <div class="background-title" style="
+    top: 100px;
+">HOW</div>
+   <div class="content">
+    <h2>Visualizing the Process</h2>
+    <div id="svg-container" style="text-align:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" style="max-width: 100%; height: auto;">
+        <style>
+          text { fill: #CCCCCC; font-family: Arial, sans-serif; }
+          .title { font-size: 24px; font-weight: bold; }
+          .subtitle { font-size: 18px; }
+          .box-text { font-size: 14px; }
+          .small-text { font-size: 12px; }
+          .arrow { fill: none; stroke: #555555; stroke-width: 2; marker-end: url(#arrowhead); }
+        </style>
+        
+        <!-- Arrow marker definition -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#555555" />
+          </marker>
+        </defs>
+        
+        <!-- Background -->
+        <rect width="100%" height="100%" fill="#111111"/>
+        
+        <!-- Title -->
+        <text x="400" y="40" text-anchor="middle" class="title">AI-Powered Goal Achievement</text>
+        <text x="400" y="70" text-anchor="middle" class="subtitle">Your Adaptive Strategic Partner</text>
+        
+        <!-- Business Goals -->
+        <rect x="50" y="100" width="200" height="80" rx="10" fill="#222222" stroke="#555555"/>
+        <text x="150" y="145" text-anchor="middle" class="box-text">Business Goals</text>
+        <text x="150" y="165" text-anchor="middle" class="small-text">Define Objectives</text>
+        
+        <!-- AI Analysis & Strategy -->
+        <rect x="300" y="220" width="200" height="160" rx="10" fill="#222222" stroke="#555555"/>
+        <text x="400" y="260" text-anchor="middle" class="box-text">AI Analysis &amp; Strategy</text>
+        <text x="400" y="290" text-anchor="middle" class="small-text">Data Processing</text>
+        <text x="400" y="315" text-anchor="middle" class="small-text">Pattern Recognition</text>
+        <text x="400" y="340" text-anchor="middle" class="small-text">Strategic Planning</text>
+        
+        <!-- Adaptive Implementation -->
+        <rect x="550" y="100" width="200" height="80" rx="10" fill="#222222" stroke="#555555"/>
+        <text x="650" y="140" text-anchor="middle" class="box-text">Adaptive</text>
+        <text x="650" y="160" text-anchor="middle" class="box-text">Implementation</text>
+        
+        <!-- Continuous Learning -->
+        <rect x="300" y="440" width="200" height="80" rx="10" fill="#222222" stroke="#555555"/>
+        <text x="400" y="470" text-anchor="middle" class="box-text">Continuous Learning</text>
+        <text x="400" y="490" text-anchor="middle" class="small-text">Refine &amp; Optimize</text>
+        
+        <!-- Goal Achievement -->
+        <rect x="550" y="440" width="200" height="80" rx="10" fill="#222222" stroke="#555555"/>
+        <text x="650" y="470" text-anchor="middle" class="box-text">Goal Achievement</text>
+        <text x="650" y="490" text-anchor="middle" class="small-text">Measure &amp; Evolve</text>
+        
+        <!-- Arrows -->
+        <path d="M250 140 L300 300" class="arrow"/>
+        <path d="M500 300 L550 140" class="arrow"/>
+        <path d="M400 380 L400 440" class="arrow"/>
+        <path d="M500 480 L550 480" class="arrow"/>
+        <path d="M650 520 C650,550 100,550 100,180 L100 140" class="arrow"/>
+        
+        <!-- Labels -->
+        <text x="260" y="200" class="small-text">Input</text>
+        <text x="540" y="200" class="small-text">Execute</text>
+        <text x="410" y="410" class="small-text">Feedback</text>
+        <text x="520" y="460" class="small-text">Progress</text>
+        <text x="350" y="540" class="small-text">Adapt &amp; Redefine</text>
+      </svg>
+      </div>
+    </div>
+  </div>
+  
   <div class="scroll-indicator">
+    <div class="scroll-indicator-dot"></div>
     <div class="scroll-indicator-dot"></div>
     <div class="scroll-indicator-dot"></div>
     <div class="scroll-indicator-dot"></div>
