@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="https://ai-agents.dev/">
+  <title>AI Agent Evolution - An Elegant Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+      body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    color: #e0e0e0;
+    height: 100%;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background-attachment: fixed;
+  }
+
+  .section {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: all 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: transform;
+    overflow: hidden;
+  }
+
+  .section-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vmin;
+    height: 80vmin;
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: all 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  #section1 .section-background { background: radial-gradient(circle, #2a2a2a 0%, transparent 70%); }
+  #section2 .section-background { background: radial-gradient(circle, #2e2e2e 0%, transparent 70%); }
+  #section3 .section-background { background: radial-gradient(circle, #323232 0%, transparent 70%); }
+  #section4 .section-background { background: radial-gradient(circle, #363636 0%, transparent 70%); }
+  #section5 .section-background { background: radial-gradient(circle, #3a3a3a 0%, transparent 70%); }
+  #section6 .section-background { background: radial-gradient(circle, #3e3e3e 0%, transparent 70%); }
+
+  #section1 { z-index: 6; }
+  #section2 { z-index: 5; transform: translateX(100%); }
+  #section3 { z-index: 4; transform: translateY(100%); }
+  #section4 { z-index: 3; transform: translateX(-100%); }
+  #section5 { z-index: 2; transform: translateY(-100%); }
+  #section6 { z-index: 1; transform: translateX(100%); }
+  
+  .content {
+    max-width: 800px;
+    padding: 40px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    position: relative;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    line-height: 1.2;
+  }
+
+  .background-title {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14vw;
+    font-weight: 700;
+    opacity: 0.03;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    transform: translateY(-50%);
+    top: 30%;
+    width: 100%;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .scroll-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    opacity: 0.7;
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 30px;
+    z-index: 1000;
+    transition: opacity 0.3s;
+  }
+
+  .scroll-hint:hover {
+    opacity: 1;
+  }
+
+  .scroll-indicator {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+  }
+
+  .scroll-indicator-dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    margin: 15px 0;
+    transition: all 0.3s;
+  }
+
+  .scroll-indicator-dot.active {
+    background-color: #fff;
+    transform: scale(1.5);
+  }
+
+  .ai-visual {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .particle {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .floating-element {
+    position: absolute;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .geometric-shape {
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(255,255,255,0.2);
+    position: absolute;
+  }
+
+  #shape1 { top: 10%; left: 10%; transform: rotate(45deg); }
+  #shape2 { bottom: 20%; right: 15%; }
+  #shape3 { top: 40%; right: 10%; transform: rotate(30deg); }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 3rem;
+    }
+    .background-title {
+      font-size: 20vw;
+    }
+    .content {
+      padding: 20px;
+    }
+  }
+
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+  }
+  .loader-content {
+    text-align: center;
+  }
+  .loader h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  .loader-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .loader-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: #fff;
+    animation: loading 2s ease-out forwards;
+  }
+  @keyframes loading {
+    to { width: 100%; }
+  }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="loader-content">
+      <h1>AIva</h1>
+      <p>a TTATC product</p>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+  <div id="section1" class="section">
+    <div class="section-background"></div>
+    <div class="background-title">Agents</div>
+    <div class="content">
+      <h2> Unlock the Power of AI Agents</h2>
+      <p>Transform your business operations with specialized AI agents tailored to meet your unique needs.
+         Unlike traditional chatbots, our agents provide deep insights and actionable strategies across key business areas.</p>
+    </div>
+    <div class="ai-visual">
+      <div class="particles" id="particles1"></div>
+    </div>
+  </div>
+  <div id="section2" class="section">
+    <div class="section-background"></div>
+    <div class="background-title">Conversational AI</div>
+    <div class="content">
+      <h2>Redefine User Interaction</h2>
+      <p>Engage with AI that understands context and nuances. Our advanced natural language processing
+         ensures your conversations are meaningful and productive.</p>
+    </div>
+    <div class="ai-visual">
+      <div class="particles" id="particles2"></div>
+    </div>
+  </div>
+  <div id="section3" class="section">
+    <div class="section-background"></div>
+    <div class="background-title">Adaptability</div>
+    <div class="content">
+      <h2>Always Evolving</h2>
+      <p>Our AI agents continuously learn and adapt to your business environment, ensuring they remain
+         effective and relevant.</p>
+    </div>
+    <div class="ai-visual">
+      <div class="particles" id="particles3"></div>
+    </div>
+  </div>
+  <div id="section4" class="section">
+    <div class="section-background"></div>
+    <div class="background-title">Analytics</div>
+    <div class="content">
+      <h2>Data-Driven Decisions</h2>
+      <p>Empower your business with real-time analytics and insights. Our AI agents turn data into
+         actionable strategies, driving growth and efficiency.</p>
+    </div>
+    <div class="ai-visual">
+      <div class="particles" id="particles4"></div>
+    </div>
+  </div>
+  <div id="section5" class="section">
+    <div class="section-background"></div>
+    <div class="background-title">Integration</div>
+    <div class="content">
+      <h2>Seamless Integration</h2>
+      <p>Easily integrate our AI agents with your existing systems. Our solutions are designed to enhance,
+         not disrupt, your current workflows.</p>
+    </div>
+    <div class="ai-visual">
+      <div class="particles" id="particles5"></div>
+    </div>
+  </div>
+  <div id="section6" class="section">
+    <div class="section-background"></div>
+    <div class="background-title">Security</div>
+    <div class="content">
+      <h2>Robust Security</h2>
+      <p>Protect your data with our state-of-the-art security measures. Our AI agents are designed with
+         privacy and security at the forefront, ensuring your business remains safe and compliant.</p>
+    </div>
+    <div class="ai-visual">
+      <div class="particles" id="particles6"></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-indicator-dot"></div>
+    <div class="scroll-indicator-dot"></div>
+    <div class="scroll-indicator-dot"></div>
+    <div class="scroll-indicator-dot"></div>
+    <div class="scroll-indicator-dot"></div>
+    <div class="scroll-indicator-dot"></div>
+  </div>
+  <div class="scroll-hint">Scroll down</div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const loader = document.querySelector(".loader");
+      setTimeout(() => {
+        loader.style.opacity = "0";
+        setTimeout(() => loader.style.display = "none", 500);
+      }, 2000);
+    });
+
+    const sections = document.querySelectorAll('.section');
+    const dots = document.querySelectorAll('.scroll-indicator-dot');
+    let currentSection = 0;
+
+    function updateSection(newSection) {
+      if (newSection >= 0 && newSection < sections.length) {
+        sections[currentSection].style.transform = getExitTransform(currentSection);
+        dots[currentSection].classList.remove('active');
+        currentSection = newSection;
+        sections[currentSection].style.transform = 'translate(0, 0)';
+        dots[currentSection].classList.add('active');
+      }
+    }
+
+    function getExitTransform(sectionIndex) {
+      switch(sectionIndex) {
+        case 0: return 'translateX(-100%)';
+        case 1: return 'translateY(-100%)';
+        case 2: return 'translateX(100%)';
+        case 3: return 'translateY(100%)';
+        case 4: return 'translateX(-100%)';
+        case 5: return 'translateY(-100%)';
+      }
+    }
+
+    window.addEventListener('wheel', (e) => {
+      if (e.deltaY > 0) {
+        updateSection(currentSection + 1);
+      } else {
+        updateSection(currentSection - 1);
+      }
+    });
+
+    document.querySelector('.scroll-hint').addEventListener('click', () => {
+      updateSection(currentSection + 1);
+    });
+
+    updateSection(0);
+  </script>
+</body>
+</html>
