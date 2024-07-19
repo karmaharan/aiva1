@@ -382,58 +382,51 @@
     .showcase-nav.prev { left: 10px; }
     .showcase-nav.next { right: 10px; }
     .particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.3;
-  animation: float 3s infinite ease-in-out;
-}
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+    }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
+    .shape {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-.floating-element {
-  position: absolute;
-  animation: float 6s infinite ease-in-out;
-}
+    .shape-circle {
+      border-radius: 50%;
+    }
 
-.geometric-shape {
-  width: 30px;
-  height: 30px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  opacity: 0.5;
-}
+    .shape-triangle {
+      width: 0;
+      height: 0;
+      background: transparent;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 26px solid rgba(255, 255, 255, 0.2);
+      border-top: none;
+    }
 
-/* Add different shapes */
-.geometric-shape:nth-child(3n+1) {
-  border-radius: 50%; /* Circle */
-}
+    .shape-square {
+      transform: rotate(45deg);
+    }
 
-.geometric-shape:nth-child(3n+2) {
-  transform: rotate(45deg); /* Diamond */
-}
-
-.geometric-shape:nth-child(3n) {
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 26px solid rgba(255, 255, 255, 0.2);
-  border-top: none;
-  /* Triangle */
-}
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
   </style>
 </head>
 <body>
@@ -859,6 +852,116 @@ nextBtn.addEventListener('click', () => navigate(-1)); // Move left for next
 
   // Initialize
   updateSection(0);
+	
+  function createParticlesAndShapes(container, particleCount, shapeCount) {
+      createParticles(container, particleCount);
+      createShapes(container, shapeCount);
+    }
+	    // Particle animation
+    function createParticles(container, count) {
+      for (let i = 0; i < count; i++) {
+        let particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random size between 2 and 6 pixels
+        let size = Math.random() * 4 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random position
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Random opacity between 0.1 and 0.5
+        particle.style.opacity = Math.random() * 0.4 + 0.1;
+        
+        container.appendChild(particle);
+        
+        // Animate the particle
+        animateParticle(particle);
+      }
+    }
+
+    function animateParticle(particle) {
+      // Random duration between 10 and 20 seconds
+      let duration = Math.random() * 10000 + 10000;
+      
+      // Random direction
+      let xDirection = Math.random() > 0.5 ? 1 : -1;
+      let yDirection = Math.random() > 0.5 ? 1 : -1;
+      
+      // Random distance between 10% and 30% of the container
+      let xDistance = (Math.random() * 20 + 10) * xDirection;
+      let yDistance = (Math.random() * 20 + 10) * yDirection;
+      
+      particle.animate([
+        { transform: 'translate(0, 0)' },
+        { transform: `translate(${xDistance}%, ${yDistance}%)` }
+      ], {
+        duration: duration,
+        iterations: Infinity,
+        direction: 'alternate',
+        easing: 'ease-in-out'
+      });
+    }
+
+    function createShapes(container, count) {
+      const shapes = ['circle', 'triangle', 'square'];
+      for (let i = 0; i < count; i++) {
+        let shape = document.createElement('div');
+        shape.className = `shape shape-${shapes[i % 3]}`;
+        
+        // Random size between 20 and 40 pixels
+        let size = Math.random() * 20 + 20;
+        shape.style.width = `${size}px`;
+        shape.style.height = `${size}px`;
+        
+        // Random position
+        shape.style.left = `${Math.random() * 100}%`;
+        shape.style.top = `${Math.random() * 100}%`;
+        
+        // Random opacity between 0.1 and 0.3
+        shape.style.opacity = Math.random() * 0.2 + 0.1;
+        
+        container.appendChild(shape);
+        
+        // Animate the shape
+        animateShape(shape);
+      }
+    }
+
+    function animateShape(shape) {
+      // Random duration between 15 and 25 seconds
+      let duration = Math.random() * 10000 + 15000;
+      
+      // Random float distance between 30px and 50px
+      let floatDistance = Math.random() * 20 + 30;
+      
+      shape.animate([
+        { transform: 'translateY(0)' },
+        { transform: `translateY(-${floatDistance}px)` }
+      ], {
+        duration: duration,
+        iterations: Infinity,
+        direction: 'alternate',
+        easing: 'ease-in-out'
+      });
+
+      // Add slow rotation
+      shape.animate([
+        { transform: 'rotate(0deg)' },
+        { transform: 'rotate(360deg)' }
+      ], {
+        duration: duration * 2,
+        iterations: Infinity,
+        easing: 'linear'
+      });
+    }
+
+    // Create particles and shapes for each section
+    document.querySelectorAll('.particles').forEach(container => {
+      createParticlesAndShapes(container, 40, 15); // Create 40 particles and 15 shapes per section
+    });
 
 
 });
